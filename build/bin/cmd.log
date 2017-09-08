@@ -1,0 +1,30 @@
+# Date: Fri Sep  8 14:56:00 2017
+# Program: ./LineMatching
+
+# Mode: default
+
+# Arguments:
+    First Image   [img1.png]
+    Second Image  [img2.png]
+
+# Options:
+    -ew           [20]
+    -rc           [10]
+    -vb           
+    -bip          
+    -noct         [4]
+    -nlay         [2]
+    -nadd         [2]
+    -olmfn        [result.txt]
+    -nnp          [10]
+    -tt           [0.3]
+    -dat          [0.349066]
+    -pj           
+    -pj1          [nodes1.txt]
+    -pj2          [nodes2.txt]
+    -pl           
+    -pl1          [lines1.txt]
+    -pl2          [lines2.txt]
+
+<#>
+

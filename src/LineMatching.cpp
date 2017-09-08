@@ -283,7 +283,7 @@ void CLineMatching::descriptorEvaluationUniquePtMatches()
 void CLineMatching::lineMatches2Mat(Mat &mline)
 {
 	string fileName = _outFileName;
-	ofstream outFile(fileName.c_str(), ios_base::out);  //°´ÐÂ½¨»ò¸²¸Ç·½Ê½Ð´Èë  	
+	ofstream outFile(fileName.c_str(), ios_base::out);  //ï¿½ï¿½ï¿½Â½ï¿½ï¿½ò¸²¸Ç·ï¿½Ê½Ð´ï¿½ï¿½  	
 
 	vector<int> vser;
 	int nmatch = vstrLineMatch.size();	
@@ -297,7 +297,7 @@ void CLineMatching::lineMatches2Mat(Mat &mline)
 			strline2[ser2].pe.x, strline2[ser2].pe.y);
 		mline.push_back(tmat);
 		vser.push_back(ser1);
-		//	outFile<< ser1 << ' ' << ser2 <<endl;   //Ã¿ÁÐÊý¾ÝÓÃ tab ¸ô¿ª  			
+		//	outFile<< ser1 << ' ' << ser2 <<endl;   //Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ tab ï¿½ï¿½  			
 	}		
 	vector<int> vsidex;
 	sortIdx(vser, vsidex, SORT_EVERY_ROW);
@@ -307,7 +307,7 @@ void CLineMatching::lineMatches2Mat(Mat &mline)
 		int ser = vsidex.at(i);
 		int ser1 = vstrLineMatch[ser].serLine1;		
 		int ser2 = vstrLineMatch[ser].serLine2;		
-		outFile<< ser1 << ' ' << ser2 <<endl;   //Ã¿ÁÐÊý¾ÝÓÃ tab ¸ô¿ª  			
+		outFile<< ser1 << ' ' << ser2 <<endl;   //Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ tab ï¿½ï¿½  			
 	}
 }
 
@@ -618,7 +618,7 @@ void CLineMatching::matchSingleLines_homography(float homDistThr)
 	vpointMatch2Mat(vstrPointMatch, pointMatches);
 	vector<strFanSection> vMatchedFans1, vMatchedFans2, vUnmatchedFans1, vUnmatchedFans2;
 	bifurcateFans(vstrFanSection1, vstrFanSection2, vstrFanMatch, vMatchedFans1, vMatchedFans2, vUnmatchedFans1, vUnmatchedFans2);
-	vector<vector<vector<int>>> vEnteredSingleLines1, vEnteredSingleLines2;
+	vector<vector<vector<int> > > vEnteredSingleLines1, vEnteredSingleLines2;
 	groupSingleLines(vUnmatchedLines1, vMatchedFans1, nEnterGroups, vEnteredSingleLines1);
 	groupSingleLines(vUnmatchedLines2, vMatchedFans2, nEnterGroups, vEnteredSingleLines2);
 	vector<strFanMatch> vNewFanMatch;
@@ -1050,7 +1050,7 @@ void CLineMatching::matchSingleLines(float desDistThr, float fDistThr)
 
 	vector<strFanSection> vMatchedFans1, vMatchedFans2, vUnmatchedFans1, vUnmatchedFans2;
 	bifurcateFans(vstrFanSection1, vstrFanSection2, vstrFanMatch, vMatchedFans1, vMatchedFans2, vUnmatchedFans1, vUnmatchedFans2);
-	vector<vector<vector<int>>> vEnteredSingleLines1, vEnteredSingleLines2;
+	vector<vector<vector<int> > > vEnteredSingleLines1, vEnteredSingleLines2;
 	groupSingleLines(vUnmatchedLines1, vMatchedFans1, nEnterGroups, vEnteredSingleLines1);
 	groupSingleLines(vUnmatchedLines2, vMatchedFans2, nEnterGroups, vEnteredSingleLines2);
 	vector<strFanMatch> vNewFanMatch;
@@ -1440,7 +1440,7 @@ float CLineMatching::estimateLocalRotateAngle(strFanSection strFan1, strFanSecti
 }
 
 void CLineMatching::groupSingleLines(vector<strLine> vUnmatchedLines, vector<strFanSection> vMatchedFans, 
-	int nEnterGroups, vector<vector<vector<int>>> &vEnteredSingleLines)
+	int nEnterGroups, vector<vector<vector<int> > > &vEnteredSingleLines)
 {
 	Mat matchedJunctions, nearestJunctions;			
 	int nMatchedFans = vMatchedFans.size();
@@ -1453,7 +1453,7 @@ void CLineMatching::groupSingleLines(vector<strLine> vUnmatchedLines, vector<str
 	}
 	nearestMatchedPointsToLine(vUnmatchedLines, matchedJunctions, nEnterGroups, nearestJunctions);
 	int nunLines = vUnmatchedLines.size();
-	vector<vector<int>> vGroup(nMatchedFans);
+	vector<vector<int> > vGroup(nMatchedFans);
 
 	for (int i = 0; i < nunLines; i++)
 	{
@@ -1746,7 +1746,7 @@ void CLineMatching::addFansMatch(float desDistThr, float fDistThr)
 	vector<strFanSection> vMatchedFans1, vMatchedFans2, vUnmatchedFans1, vUnmatchedFans2;
 	bifurcateFans(vstrFanSection1, vstrFanSection2, vstrFanMatch, vMatchedFans1, vMatchedFans2, vUnmatchedFans1, vUnmatchedFans2);
 
-	vector<vector<vector<int>>>  vGroupedUnFans1, vGroupedUnFans2;
+	vector<vector<vector<int> > >  vGroupedUnFans1, vGroupedUnFans2;
 	groupFans(vMatchedFans1, vUnmatchedFans1, nEnterCluster, vGroupedUnFans1);
 	groupFans(vMatchedFans2, vUnmatchedFans2, nEnterCluster, vGroupedUnFans2);
 	Mat nearestMPts1, nearestMPts2;
@@ -1881,11 +1881,11 @@ bool CLineMatching::isCurPairFanConsistentWithNearMPts(strFanSection strFan1, st
 }
 
 void CLineMatching::groupFans(vector<strFanSection> vMatchedFans, vector<strFanSection> vUnmatchedFans,  int nEnterCluster, 
-												  vector<vector<vector<int>>>  &vGroupedUnjunc)
+												  vector<vector<vector<int> > >  &vGroupedUnjunc)
 {
 	int nunFans = vUnmatchedFans.size();
 	int nMatchedFans = vMatchedFans.size();
-	vector<vector<int>>   vEnteredunFans(nMatchedFans);	
+	vector<vector<int> >   vEnteredunFans(nMatchedFans);	
 	Mat enteringFans;
 
 	for (int i = 0; i < nunFans; i++)
@@ -3216,7 +3216,7 @@ float CLineMatching::descriptorDistance(Mat des1, Mat des2, int ncand)
 int CLineMatching::descriptorsMatching(Mat pts1, Mat pts2, Mat des1, Mat des2, float distThr, vector<strFanMatch> &vFanMatch)
 {
 	FlannBasedMatcher matcher;  	
-	vector<vector<DMatch>> m_knnMatches;  	
+	vector<vector<DMatch> > m_knnMatches;  	
 	matcher.knnMatch(des1, des2, m_knnMatches, 1);  
 	Mat tpts1, tpts2;
 	int nmatch = m_knnMatches.size();
@@ -4202,7 +4202,9 @@ void CLineMatching::concatenateTwoImgs(Mat mImg1, Mat mImg2, Mat &outImg)
 	cvSetImageROI( stacked, cvRect(img1.width, 0, img2.width, img2.height) ); 
 	cvCopy(&img2, stacked);//, stacked, NULL ); 
 	cvResetImageROI(stacked); 
-	outImg = Mat(stacked,0);
+	outImg = cvarrToMat(stacked);
+	// outImg = Mat(stacked);
+	// cvConvert(outImg,stacked);
 }
 
 void CLineMatching::getPointsonPolarline(vector<Point2f> &PointSet1,vector<Point2f> &PointSet2, Mat_<double> F, double T, bool *pbIsKept)
